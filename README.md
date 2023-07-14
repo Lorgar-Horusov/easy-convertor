@@ -1,2 +1,5 @@
 # easy-convertor
-convert images
+convert your images to any format
+
+ pip install -r requirements.txt
+ python main.py
