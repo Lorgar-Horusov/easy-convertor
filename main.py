@@ -38,7 +38,7 @@ def convertor(new_suffix='.jpg'):
 
 def main():
     while True:
-        suffixes = {1: '.jpg', 2: '.png', 3: '.gif', 4: '.bmp', 5: '.tif', 6: '.webp', 7: '.svg', 8: '.ico', 0: 'exit'}
+        suffixes = {1: '.jpg', 2: '.png', 3: '.gif', 4: '.bmp', 5: '.tif', 6: '.webp', 7: '.ico', 0: 'exit'}
         for k, v in suffixes.items():
             print(f'{k}:{v}')
         suffix = int(input(f'[=>] please select new suffix: '))
