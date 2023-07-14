@@ -14,7 +14,6 @@ def clear():
 
 def pause():
     msvcrt.getch()
-    clear()
 
 
 def convertor(new_suffix='.jpg'):
@@ -24,6 +23,7 @@ def convertor(new_suffix='.jpg'):
     files = folder_path.glob('*')
     total_files = sum(1 for _ in files)
     files = folder_path.glob('*')
+    
     with alive_bar(total_files, bar='circles', spinner='classic') as bar:
         for file in files:
             if file.is_file():
@@ -46,9 +46,10 @@ def main():
             print(f'[!] suffix {suffix} not a found')
         if suffix == 0:
             exit()
-
         clear()
+        
         convertor(new_suffix=suffixes[suffix])
+        clear()
         print(f'[>>] Job finish!\npress any kay to continue')
         pause()
 
