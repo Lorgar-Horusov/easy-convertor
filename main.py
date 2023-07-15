@@ -1,7 +1,7 @@
 from PIL import Image
 from pathlib import Path
 from alive_progress import alive_bar
-import os
+import os, sys
 
 
 def clear():
@@ -46,7 +46,7 @@ def main():
         if suffix not in suffixes.keys():
             print(f'[!] suffix {suffix} not a found')
         if suffix == 0:
-            exit()
+            sys.exit()
 
         clear()
         convertor(new_suffix=suffixes[suffix])
