@@ -37,6 +37,7 @@ def convertor(new_suffix='.jpg'):
 
 
 def main():
+    clear()
     while True:
         suffixes = {1: '.png', 2: '.gif', 3: '.bmp', 4: '.tif', 5: '.webp', 6: '.ico', 0: 'exit'}
         for k, v in suffixes.items():
