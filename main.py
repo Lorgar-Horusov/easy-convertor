@@ -2,7 +2,6 @@ from PIL import Image
 from pathlib import Path
 from alive_progress import alive_bar
 import os
-import msvcrt
 
 
 def clear():
@@ -13,7 +12,10 @@ def clear():
 
 
 def pause():
-    msvcrt.getch()
+    if os.name == "nt":
+        os.system('pause')
+    elif os.name == "posix":
+        os.system('read -n 1 -s -r -p "Press any key to continue..."')
 
 
 def convertor(new_suffix='.jpg'):
@@ -23,7 +25,6 @@ def convertor(new_suffix='.jpg'):
     files = folder_path.glob('*')
     total_files = sum(1 for _ in files)
     files = folder_path.glob('*')
-    
     with alive_bar(total_files, bar='circles', spinner='classic') as bar:
         for file in files:
             if file.is_file():
@@ -33,12 +34,11 @@ def convertor(new_suffix='.jpg'):
                 convert_file.save(output_path / new_name)
                 print(f'{new_name} Done!')
                 bar()
-    clear()
 
 
 def main():
     while True:
-        suffixes = {1: '.jpg', 2: '.png', 3: '.gif', 4: '.bmp', 5: '.tif', 6: '.webp', 7: '.ico', 0: 'exit'}
+        suffixes = {1: '.png', 2: '.gif', 3: '.bmp', 4: '.tif', 5: '.webp', 6: '.ico', 0: 'exit'}
         for k, v in suffixes.items():
             print(f'{k}:{v}')
         suffix = int(input(f'[=>] please select new suffix: '))
@@ -46,12 +46,12 @@ def main():
             print(f'[!] suffix {suffix} not a found')
         if suffix == 0:
             exit()
+
         clear()
-        
         convertor(new_suffix=suffixes[suffix])
-        clear()
-        print(f'[>>] Job finish!\npress any kay to continue')
+        print(f'[>>] Job finish!')
         pause()
+        clear()
 
 
 if __name__ == "__main__":
