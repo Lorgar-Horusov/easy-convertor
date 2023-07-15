@@ -40,42 +40,20 @@ def convertor(new_suffix='.jpg'):
 
 def main():
     while True:
-        print('1 png\n'
-              '2 gif\n'
-              '3 bmp\n'
-              '4 tif\n'
-              '5 webp (not support linux)\n'
-              '6 ico\n'
-              '0 exit\n')
-        suffix = input('please select suffix or number').lower().strip()
+        suffixes = {1: '.png', 2: '.gif', 3: '.bmp', 4: '.tif', 5: '.webp', 6: '.ico', 0: 'exit'}
+        for k, v in suffixes.items():
+            print(f'{k}:{v}')
+        suffix = int(input(f'[=>] please select new suffix: '))
+        if suffix not in suffixes.keys():
+            print(f'[!] suffix {suffix} not a found')
+        if suffix == 0:
+            sys.exit()
+
         clear()
-        match suffix:
-            case '1', 'png', 'p':
-                convertor(new_suffix='.png')
-                break
-            case '2', 'gif', 'g':
-                convertor(new_suffix='.gif')
-                break
-            case '3', 'bmp', 'b':
-                convertor(new_suffix='.bmp')
-                break
-            case '4', 'tif', 't':
-                convertor(new_suffix='.tif')
-                break
-            case '5', 'webp', 'w':
-                if os.name == "nt":
-                    convertor(new_suffix='.webp')
-                    break
-                elif os.name == "posix":
-                    print('[!] "webp" not support linux')
-                    break
-            case '6', 'ico', 'i':
-                convertor(new_suffix='.ico')
-                break
-            case '0', 'exit', 'e':
-                sys.exit()
-            case _:
-                print('suffix not a found')
+        convertor(new_suffix=suffixes[suffix])
+        print(f'[>>] Job finish!')
+        pause()
+        clear()
 
 
 if __name__ == "__main__":
