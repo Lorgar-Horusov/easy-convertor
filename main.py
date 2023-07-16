@@ -32,9 +32,12 @@ def convertor(new_suffix='.jpg'):
             if file.is_file():
                 file_name = input_path / file.name
                 new_name = 'converted_' + file.stem + new_suffix
-                convert_file = Image.open(file_name)
-                convert_file.save(output_path / new_name)
-                print(f'{new_name} Done!')
+                try:
+                    convert_file = Image.open(file_name)
+                    convert_file.save(output_path / new_name)
+                    print(f'{new_name} Done!')
+                except OSError:
+                    print(f'{new_name} Error!')
                 bar()
 
 
